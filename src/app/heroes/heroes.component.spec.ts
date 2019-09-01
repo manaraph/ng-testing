@@ -1,5 +1,5 @@
-import { HeroesComponent } from "./heroes.component";
-import { of } from "rxjs";
+import { HeroesComponent } from './heroes.component';
+import { of } from 'rxjs';
 
 describe('HeroesComponent', () => {
   let component: HeroesComponent;
@@ -13,7 +13,7 @@ describe('HeroesComponent', () => {
       { id: 3, name: 'SuperDude', strength: 77 }
     ];
 
-    mockHeroService = jasmine.createSpyObj(['getHeroes', 'addhero', 'deleteHero'])
+    mockHeroService = jasmine.createSpyObj(['getHeroes', 'addhero', 'deleteHero']);
     component = new HeroesComponent(mockHeroService);
   });
 
