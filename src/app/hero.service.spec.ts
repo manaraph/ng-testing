@@ -6,6 +6,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 describe('HeroService', () => {
   let mockMessageService;
   let httpTestingController: HttpTestingController;
+  let service: HeroService;
 
   beforeEach(() => {
     mockMessageService = jasmine.createSpyObj(['add']);
@@ -23,11 +24,26 @@ describe('HeroService', () => {
     });
 
     httpTestingController = TestBed.get(HttpTestingController); //  Getting a handle to a service (HttpTestingController) - Method 1
+    service = TestBed.get(HeroService);
   });
 
+  // describe('getHero', () => {
+  //   it('should call get with the correct URL',
+  //   // Getting a handle to a service - Method 2
+  //     inject(
+  //       [HeroService, HttpTestingController],
+  //       (service: HeroService, controller: HttpTestingController) => {
+  //       service.getHero(4).subscribe();
+  //     })
+  //   );
+  // });
+
   describe('getHero', () => {
-    it('should call get with the correct URL', inject() () => {
-      service 
-    })
-  })
+    it('should call get with the correct URL', () => {
+      service.getHero(4).subscribe();
+      const req = httpTestingController.expectOne('api/heroes/4');
+      req.flush({id: 4, name: 'SuperDude', strength: 100});
+      httpTestingController.verify();
+    });
+  });
 });
