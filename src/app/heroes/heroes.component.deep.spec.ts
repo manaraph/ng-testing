@@ -53,9 +53,18 @@ describe('HeroesComponent (Deep tests)', () => {
     fixture.detectChanges();
     const heroComponents = fixture.debugElement.queryAll(By.directive(HeroComponent));
 
-    //  Confirms that the stopPropagation method was called after the click event
-    heroComponents[0].query(By.css('button'))
-      .triggerEventHandler('click', {stopPropagation: () => {}});
+    /**
+     * Testing events on elements
+     */
+    //  Method 1: Trigger the click event in the child html component.
+    // heroComponents[0].query(By.css('button'))
+      // .triggerEventHandler('click', {stopPropagation: () => {}});  //  Confirm the stopPropagation method was called.
+
+    //  Method 2: Instruct the child component to raise the delete event
+    // (<HeroComponent>heroComponents[0].componentInstance).delete.emit(undefined);
+
+    //  Method 3: Trigger the delete event in the child component
+    heroComponents[0].triggerEventHandler('delete', null);
 
     expect(fixture.componentInstance.delete).toHaveBeenCalledWith(HEROES[0]);
   });
